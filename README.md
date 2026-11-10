@@ -19,6 +19,17 @@ npm run dev
 
 Open the Vite URL shown in the terminal. For a production-style local run, use `npm run build`, then `npm run start`; the API server serves the built app on port 3001. Set `PORT` and `HOST` to configure the server address.
 
+## Deploy to Render
+
+The included `render.yaml` configures one Node.js web service that builds and serves both the app and API, with a persistent disk for the SQLite database and candidate photos.
+
+1. Push or merge this repository to GitHub.
+2. In Render, choose **New → Blueprint**, connect `daryooo/e-voting-school-system`, and select the `main` branch.
+3. Before the first deploy, enter `EBOTO_ADMIN_EMAIL` and a unique, strong `EBOTO_ADMIN_PASSWORD` when prompted. These credentials initialize the first production admin; keep them private.
+4. Review the service and persistent-disk cost, then create the Blueprint. When the deployment passes its health check, open its `onrender.com` URL.
+
+The configured persistent disk requires a paid Render web-service plan. Do not remove the disk or change `EBOTO_DATA_DIR` after launch: the election database and uploaded candidate photos are stored there. Registration currently collects self-reported student information and does not verify CTU identity. Complete the institution’s identity-verification, backup, security, and election-readiness reviews before using the service for a real election.
+
 ## Demo accounts
 
 The empty development database is seeded automatically:
