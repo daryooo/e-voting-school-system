@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: eboto-ctu-voting-system
+    runtime: node
+    plan: starter
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    disk:
+      name: eboto-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: EBOTO_DATA_DIR
+        value: /var/data
+      - key: EBOTO_ADMIN_EMAIL
+        sync: false
+      - key: EBOTO_ADMIN_PASSWORD
+        sync: false
